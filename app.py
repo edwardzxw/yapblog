@@ -82,7 +82,10 @@ class Entry(flask_db.Model):
     def save(self, *args, **kwargs):
         # Generate a URL-friendly representation of the entry's title.
         if not self.slug:
-            self.slug = re.sub('[^\w]+', '-', self.title.lower()).strip('-')
+            # encode chinese chars (or other unicode chars) with UTF-8
+            # then quote them to URL-acceptable ascii chars as blog slug
+            quoted = urllib.quote_plus(self.title.lower().encode('utf8'))
+            self.slug = re.sub('[^\w]+', '-', quoted).strip('-')
         ret = super(Entry, self).save(*args, **kwargs)
 
         # Store search content.
