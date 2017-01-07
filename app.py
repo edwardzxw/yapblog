@@ -92,6 +92,17 @@ class Entry(flask_db.Model):
         self.update_search_index()
         return ret
 
+    def delete(self):
+        # Delete this entry from table.
+        # Learnt from this page: http://docs.peewee-orm.com/en/latest/peewee/api.html?highlight=Model#misc ,
+        # from the description for Model.delete() method.
+        q = super(Entry, self).delete().where(Entry.slug == self.slug)
+        ret = q.execute()
+
+        # Store search content.
+        self.update_search_index()
+        return ret
+
     def update_search_index(self):
         # Create a row in the FTSEntry table with the post content. This will
         # allow us to use SQLite's awesome full-text search extension to
@@ -220,6 +231,19 @@ def _create_or_edit(entry, template):
 
     return render_template(template, entry=entry)
 
+def _delete(entry, template):
+    if request.method == 'POST':
+        try:
+            with database.atomic():
+                entry.delete()
+        except IntegrityError:
+            flash('Error: this entry is already in use.', 'danger')
+        else:
+            flash('Entry has been deleted.', 'success')
+            return redirect(url_for('index'))
+
+    return render_template(template, entry=entry)
+
 @app.route('/create/', methods=['GET', 'POST'])
 @login_required
 def create():
@@ -245,6 +269,12 @@ def detail(slug):
 def edit(slug):
     entry = get_object_or_404(Entry, Entry.slug == slug)
     return _create_or_edit(entry, 'edit.html')
+
+@app.route('/<slug>/delete/', methods=['GET', 'POST'])
+@login_required
+def delete(slug):
+    entry = get_object_or_404(Entry, Entry.slug == slug)
+    return _delete(entry, 'delete.html')
 
 @app.template_filter('clean_querystring')
 def clean_querystring(request_args, *keys_to_remove, **new_values):
