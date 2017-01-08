@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %}Delete entry{% endblock %}
+{% block title %}{{ _("Delete entry") }}{% endblock %}
 
-{% block content_title %}Delete entry{% endblock %}
+{% block content_title %}{{ _("Delete entry") }}{% endblock %}
 
 {% block content %}
-  <p>Click the button below to delete this entry.</p>
+  <p>{{ _("Click the button below to delete this entry.") }}</p>
   <form action="{{ url_for('delete', slug=entry.slug) }}" class="form-horizontal" method="post">
-    <button class="btn btn-primary" type="submit">Delete entry</button>
+    <button class="btn btn-primary" type="submit">{{ _("Delete entry") }}</button>
   </form>
 {% endblock %}

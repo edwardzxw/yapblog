@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import datetime
 import functools
 import os
@@ -14,6 +16,7 @@ from micawber.cache import Cache as OEmbedCache
 from peewee import *
 from playhouse.flask_utils import FlaskDB, get_object_or_404, object_list
 from playhouse.sqlite_ext import *
+from flask_babel import Babel, gettext
 
 
 # Blog configuration values.
@@ -44,6 +47,20 @@ app.config.from_object(__name__)
 # FlaskDB is a wrapper for a peewee database that sets up pre/post-request
 # hooks for managing database connections.
 flask_db = FlaskDB(app)
+
+# I18N
+babel = Babel(app)
+# TODO: move supported languages list to a global configuration file.
+LANGUAGES = {
+    'en': 'English',
+    'zh_Hans_CN': '简体中文'
+}
+
+@babel.localeselector
+def get_locale():
+    #return request.accept_languages.best_match(LANGUAGES.keys())
+    # Fixate the language as Chinese for now
+    return 'zh_Hans_CN'
 
 # The `database` is the actual peewee database, as opposed to flask_db which is
 # the wrapper.
@@ -176,10 +193,10 @@ def login():
         if password == app.config['ADMIN_PASSWORD']:
             session['logged_in'] = True
             session.permanent = True  # Use cookie to store session.
-            flash('You are now logged in.', 'success')
+            flash(gettext('You are now logged in.'), 'success')
             return redirect(next_url or url_for('index'))
         else:
-            flash('Incorrect password.', 'danger')
+            flash(gettext('Incorrect password.'), 'danger')
     return render_template('login.html', next_url=next_url)
 
 @app.route('/logout/', methods=['GET', 'POST'])
@@ -213,7 +230,7 @@ def _create_or_edit(entry, template):
         entry.content = request.form.get('content') or ''
         entry.published = request.form.get('published') or False
         if not (entry.title and entry.content):
-            flash('Title and Content are required.', 'danger')
+            flash(gettext('Title and Content are required.'), 'danger')
         else:
             # Wrap the call to save in a transaction so we can roll it back
             # cleanly in the event of an integrity error.
@@ -221,9 +238,9 @@ def _create_or_edit(entry, template):
                 with database.atomic():
                     entry.save()
             except IntegrityError:
-                flash('Error: this title is already in use.', 'danger')
+                flash(gettext('Error: this title is already in use.'), 'danger')
             else:
-                flash('Entry saved successfully.', 'success')
+                flash(gettext('Entry saved successfully.'), 'success')
                 if entry.published:
                     return redirect(url_for('detail', slug=entry.slug))
                 else:
@@ -237,9 +254,9 @@ def _delete(entry, template):
             with database.atomic():
                 entry.delete()
         except IntegrityError:
-            flash('Error: this entry is already in use.', 'danger')
+            flash(gettext('Error: this entry is already in use.'), 'danger')
         else:
-            flash('Entry has been deleted.', 'success')
+            flash(gettext('Entry has been deleted.'), 'success')
             return redirect(url_for('index'))
 
     return render_template(template, entry=entry)

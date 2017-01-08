@@ -1,0 +1,143 @@
+# Chinese (Simplified, China) translations for PROJECT.
+# Copyright (C) 2017 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2017-01-08 17:35+0800\n"
+"PO-Revision-Date: 2017-01-08 17:11+0800\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_Hans_CN\n"
+"Language-Team: zh_Hans_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.3.4\n"
+
+#: ../app.py:196
+msgid "You are now logged in."
+msgstr "您已登录。"
+
+#: ../app.py:199
+msgid "Incorrect password."
+msgstr "密码错误。"
+
+#: ../app.py:233
+msgid "Title and Content are required."
+msgstr "标题和内容不能为空。"
+
+#: ../app.py:241
+msgid "Error: this title is already in use."
+msgstr "错误：该标题已经被使用。"
+
+#: ../app.py:243
+msgid "Entry saved successfully."
+msgstr "博客保存成功。"
+
+#: ../app.py:257
+msgid "Error: this entry is already in use."
+msgstr "错误：该博客正在被使用。"
+
+#: ../app.py:259
+msgid "Entry has been deleted."
+msgstr "博客已被删除。"
+
+#: ../templates/base.html:4 ../templates/base.html:27
+msgid "Edward Zhang's Blog"
+msgstr "智圆行方"
+
+#: ../templates/base.html:32
+msgid "Drafts"
+msgstr "草稿"
+
+#: ../templates/base.html:33
+msgid "Create Entry"
+msgstr "创建"
+
+#: ../templates/base.html:34 ../templates/logout.html:3
+#: ../templates/logout.html:5 ../templates/logout.html:10
+msgid "Log out"
+msgstr "退出"
+
+#: ../templates/base.html:67
+msgid "Edward Zhang, &copy; 2017"
+msgstr "智圆行方, &copy; 2017"
+
+#: ../templates/create.html:3 ../templates/create.html:5
+msgid "Create entry"
+msgstr "创建"
+
+#: ../templates/create.html:10
+msgid "Title"
+msgstr "标题"
+
+#: ../templates/create.html:16
+msgid "Content"
+msgstr "内容"
+
+#: ../templates/create.html:25
+msgid "Published?"
+msgstr "发布？"
+
+#: ../templates/create.html:32
+msgid "Create"
+msgstr "创建"
+
+#: ../templates/create.html:33
+msgid "Cancel"
+msgstr "取消"
+
+#: ../templates/delete.html:3 ../templates/delete.html:5
+#: ../templates/delete.html:10
+msgid "Delete entry"
+msgstr "删除"
+
+#: ../templates/delete.html:8
+msgid "Click the button below to delete this entry."
+msgstr "单击下面的按键以确认删除该博客。"
+
+#: ../templates/detail.html:9
+msgid "Edit"
+msgstr "编辑"
+
+#: ../templates/detail.html:10
+msgid "Delete"
+msgstr "删除"
+
+#: ../templates/detail.html:15 ../templates/index.html:17
+msgid "Created"
+msgstr "创建于"
+
+#: ../templates/edit.html:3 ../templates/edit.html:5
+msgid "Edit entry"
+msgstr "编辑"
+
+#: ../templates/edit.html:9
+msgid "Save changes"
+msgstr "保存"
+
+#: ../templates/index.html:3 ../templates/index.html:5
+msgid "Blog entries"
+msgstr "博客列表"
+
+#: ../templates/index.html:19
+msgid "No entries have been created yet."
+msgstr "尚未创建任何博客。"
+
+#: ../templates/login.html:3 ../templates/login.html:5
+#: ../templates/login.html:17
+msgid "Log in"
+msgstr "登录"
+
+#: ../templates/login.html:10
+msgid "Password"
+msgstr "密码"
+
+#: ../templates/logout.html:8
+msgid "Click the button below to log out of the site."
+msgstr "单击下面的按键以退出。"
+
